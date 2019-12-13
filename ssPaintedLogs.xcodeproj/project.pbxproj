@@ -3,11 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		97CD9EA823A2669700DC525E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CD9EA723A2669700DC525E /* main.swift */; };
+		97CD9EB023A2673400DC525E /* Commander in Frameworks */ = {isa = PBXBuildFile; productRef = 97CD9EAF23A2673400DC525E /* Commander */; };
+		97CD9EB323A293D300DC525E /* Rainbow in Frameworks */ = {isa = PBXBuildFile; productRef = 97CD9EB223A293D300DC525E /* Rainbow */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -23,7 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		97CD9EA423A2669700DC525E /* ssColorizedLogs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ssColorizedLogs; sourceTree = BUILT_PRODUCTS_DIR; };
+		97CD9EA423A2669700DC525E /* ssPaintedLogs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ssPaintedLogs; sourceTree = BUILT_PRODUCTS_DIR; };
 		97CD9EA723A2669700DC525E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -32,6 +34,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97CD9EB023A2673400DC525E /* Commander in Frameworks */,
+				97CD9EB323A293D300DC525E /* Rainbow in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -41,7 +45,7 @@
 		97CD9E9B23A2669700DC525E = {
 			isa = PBXGroup;
 			children = (
-				97CD9EA623A2669700DC525E /* ssColorizedLogs */,
+				97CD9EA623A2669700DC525E /* ssPaintedLogs */,
 				97CD9EA523A2669700DC525E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,25 +53,25 @@
 		97CD9EA523A2669700DC525E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				97CD9EA423A2669700DC525E /* ssColorizedLogs */,
+				97CD9EA423A2669700DC525E /* ssPaintedLogs */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		97CD9EA623A2669700DC525E /* ssColorizedLogs */ = {
+		97CD9EA623A2669700DC525E /* ssPaintedLogs */ = {
 			isa = PBXGroup;
 			children = (
 				97CD9EA723A2669700DC525E /* main.swift */,
 			);
-			path = ssColorizedLogs;
+			path = ssPaintedLogs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		97CD9EA323A2669700DC525E /* ssColorizedLogs */ = {
+		97CD9EA323A2669700DC525E /* ssPaintedLogs */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 97CD9EAB23A2669700DC525E /* Build configuration list for PBXNativeTarget "ssColorizedLogs" */;
+			buildConfigurationList = 97CD9EAB23A2669700DC525E /* Build configuration list for PBXNativeTarget "ssPaintedLogs" */;
 			buildPhases = (
 				97CD9EA023A2669700DC525E /* Sources */,
 				97CD9EA123A2669700DC525E /* Frameworks */,
@@ -77,9 +81,13 @@
 			);
 			dependencies = (
 			);
-			name = ssColorizedLogs;
+			name = ssPaintedLogs;
+			packageProductDependencies = (
+				97CD9EAF23A2673400DC525E /* Commander */,
+				97CD9EB223A293D300DC525E /* Rainbow */,
+			);
 			productName = ssColorizedLogs;
-			productReference = 97CD9EA423A2669700DC525E /* ssColorizedLogs */;
+			productReference = 97CD9EA423A2669700DC525E /* ssPaintedLogs */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -97,7 +105,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 97CD9E9F23A2669700DC525E /* Build configuration list for PBXProject "ssColorizedLogs" */;
+			buildConfigurationList = 97CD9E9F23A2669700DC525E /* Build configuration list for PBXProject "ssPaintedLogs" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -106,11 +114,15 @@
 				Base,
 			);
 			mainGroup = 97CD9E9B23A2669700DC525E;
+			packageReferences = (
+				97CD9EAE23A2673400DC525E /* XCRemoteSwiftPackageReference "Commander" */,
+				97CD9EB123A293D300DC525E /* XCRemoteSwiftPackageReference "Rainbow" */,
+			);
 			productRefGroup = 97CD9EA523A2669700DC525E /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				97CD9EA323A2669700DC525E /* ssColorizedLogs */,
+				97CD9EA323A2669700DC525E /* ssPaintedLogs */,
 			);
 		};
 /* End PBXProject section */
@@ -261,7 +273,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		97CD9E9F23A2669700DC525E /* Build configuration list for PBXProject "ssColorizedLogs" */ = {
+		97CD9E9F23A2669700DC525E /* Build configuration list for PBXProject "ssPaintedLogs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97CD9EA923A2669700DC525E /* Debug */,
@@ -270,7 +282,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		97CD9EAB23A2669700DC525E /* Build configuration list for PBXNativeTarget "ssColorizedLogs" */ = {
+		97CD9EAB23A2669700DC525E /* Build configuration list for PBXNativeTarget "ssPaintedLogs" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				97CD9EAC23A2669700DC525E /* Debug */,
@@ -280,6 +292,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		97CD9EAE23A2673400DC525E /* XCRemoteSwiftPackageReference "Commander" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kylef/Commander.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.9.1;
+			};
+		};
+		97CD9EB123A293D300DC525E /* XCRemoteSwiftPackageReference "Rainbow" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Rainbow";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		97CD9EAF23A2673400DC525E /* Commander */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97CD9EAE23A2673400DC525E /* XCRemoteSwiftPackageReference "Commander" */;
+			productName = Commander;
+		};
+		97CD9EB223A293D300DC525E /* Rainbow */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 97CD9EB123A293D300DC525E /* XCRemoteSwiftPackageReference "Rainbow" */;
+			productName = Rainbow;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 97CD9E9C23A2669700DC525E /* Project object */;
 }
