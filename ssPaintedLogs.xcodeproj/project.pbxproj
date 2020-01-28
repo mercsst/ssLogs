@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9729F2A423BE22BF00B3331C /* Foundation+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9729F2A323BE22BF00B3331C /* Foundation+Extensions.swift */; };
+		97BB775223E0551600B60E9B /* Rainbow+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97BB775123E0551600B60E9B /* Rainbow+Extensions.swift */; };
 		97CD9EA823A2669700DC525E /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97CD9EA723A2669700DC525E /* main.swift */; };
 		97CD9EB023A2673400DC525E /* Commander in Frameworks */ = {isa = PBXBuildFile; productRef = 97CD9EAF23A2673400DC525E /* Commander */; };
 		97CD9EB323A293D300DC525E /* Rainbow in Frameworks */ = {isa = PBXBuildFile; productRef = 97CD9EB223A293D300DC525E /* Rainbow */; };
@@ -25,6 +27,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		9729F2A323BE22BF00B3331C /* Foundation+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation+Extensions.swift"; sourceTree = "<group>"; };
+		97BB775123E0551600B60E9B /* Rainbow+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Rainbow+Extensions.swift"; sourceTree = "<group>"; };
+		97BB775323E084DE00B60E9B /* config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = config.json; sourceTree = "<group>"; };
 		97CD9EA423A2669700DC525E /* ssPaintedLogs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ssPaintedLogs; sourceTree = BUILT_PRODUCTS_DIR; };
 		97CD9EA723A2669700DC525E /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -62,6 +67,9 @@
 			isa = PBXGroup;
 			children = (
 				97CD9EA723A2669700DC525E /* main.swift */,
+				97BB775123E0551600B60E9B /* Rainbow+Extensions.swift */,
+				9729F2A323BE22BF00B3331C /* Foundation+Extensions.swift */,
+				97BB775323E084DE00B60E9B /* config.json */,
 			);
 			path = ssPaintedLogs;
 			sourceTree = "<group>";
@@ -132,7 +140,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9729F2A423BE22BF00B3331C /* Foundation+Extensions.swift in Sources */,
 				97CD9EA823A2669700DC525E /* main.swift in Sources */,
+				97BB775223E0551600B60E9B /* Rainbow+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,6 +202,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
+				NEW_SETTING = "";
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
@@ -246,6 +257,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.15;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				NEW_SETTING = "";
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";

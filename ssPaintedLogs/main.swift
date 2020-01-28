@@ -2,8 +2,11 @@ import Foundation
 import Commander
 import Rainbow
 
-let suffixes = ["SS", "CM", "FU", "SL", "GASP", "Certificate", "ServiceCP", "*** Assertion failure"]
-let colors: Dictionary<String, Color> = [
+let applicationName = "BLEConnect(DebugKit)"
+let classNamePosition = 60
+let applicationNamePosition: Int? = 23
+
+var colors: Dictionary<String, Color> = [
     "SS" : .lightBlue,
     "SL" : .lightBlue,
     "CM" : .green,
@@ -14,115 +17,74 @@ let colors: Dictionary<String, Color> = [
     "*** Assertion failure": .red
 ]
 
-extension String {
-    func appendLineToURL(fileURL: URL) throws {
-        try (self + "<br>").appendToURL(fileURL: fileURL)
-    }
-    
-    func appendToURL(fileURL: URL) throws {
-        let data = self.data(using: String.Encoding.utf8)!
-        try data.append(fileURL: fileURL)
-    }
-    
-    func embed(wordContainingSubstring word: String, in color: Color) -> String? {
-        if let rangeOfWord = self.range(of: word) {
-            let startOfWord = rangeOfWord.lowerBound
-            let endOfWord = self[rangeOfWord.upperBound...].range(of: " ")?.upperBound ?? endIndex
-            let coloredSubstring = String(self[startOfWord...index(before: endOfWord)])
-            return self[..<startOfWord]
-                + coloredSubstring.applyingColor(color)
-                + self[endOfWord...]
-        }
-        return nil
-    }
-    
-    func embed(range: PartialRangeUpTo<Int>, in color: Color) -> String? {
-        let coloredSubstring = String(self[range])
-        return coloredSubstring.applyingColor(color) + self[range.upperBound...]
-    }
+func prefixes() -> Array<String> {
+    return Array(colors.keys)
 }
 
-extension Data {
-    func append(fileURL: URL) throws {
-        if let fileHandle = FileHandle(forWritingAtPath: fileURL.path) {
-            defer {
-                fileHandle.closeFile()
-            }
-            fileHandle.seekToEndOfFile()
-            fileHandle.write(self)
-        }
-        else {
-            try write(to: fileURL, options: .atomic)
-        }
-    }
-}
+func colors(from file: String?) {
+    if let file = file,
+        let string = try? String(contentsOfFile: file, encoding: .utf8),
+        let data = string.data(using: .utf8) {
 
-extension StringProtocol {
-    subscript(range: CountableRange<Int>) -> SubSequence {
-        let startIndex = index(self.startIndex, offsetBy: range.lowerBound)
-
-        if self.count > range.upperBound {
-            return self[startIndex..<index(startIndex, offsetBy: range.count)]
-        } else {
-            return self[startIndex..<self.endIndex]
+        print("received config \(string)")
+        print("")
+        if let parsedColor = try? JSONDecoder().decode(Dictionary<String, Color>.self, from: data) {
+            colors = parsedColor
         }
-    }
-    
-    subscript(range: CountablePartialRangeFrom<Int>) -> SubSequence {
-        self[index(startIndex, offsetBy: range.lowerBound)...]
-    }
-    
-    subscript(range: PartialRangeThrough<Int>) -> SubSequence {
-        self[...index(startIndex, offsetBy: range.upperBound)]
-    }
-    
-    subscript(range: PartialRangeUpTo<Int>) -> SubSequence {
-        self[..<index(startIndex, offsetBy: range.upperBound)]
-    }
-}
-
-extension String {
-    mutating func paintTimestamp() {
-        self = paintedTimestamp()
-    }
-    
-    func paintedTimestamp() -> String {
-        if hasPrefix("2019") {
-            return embed(range: ..<30 , in: .yellow) ?? self
-        }
-        return self
     }
 }
 
 let main = command(
+    Option<String?>("configFile", default: Optional<String>.none, description: """
+Configuration file with JSON dictionary in format: {<class name or prefix> : color}.
+Valid colors are 30-39 and 90-99 or "black", "red", "green", "yellow", "blue", "magenta", "cyan", "white", "lightBlack", "lightRed", "lightGreen", "lightYellow", "lightBlue", "lightMagenta", "lightCyan", "lightWhite".
+"""),
     Argument<String>("log", description: "input .log file")
-) { log in
+) { configFile, log in
     let start = DispatchTime.now()
-    
+
+    colors(from: configFile)
+
     do {
-        let data = try String(contentsOfFile: log, encoding: .utf8)
+        let data = try String(contentsOfFile:  log, encoding: .utf8)
         let logLines = data.components(separatedBy: .newlines)
         
+        var shouldPrintSuplementaryLines = false
         upperFor: for line in logLines {
             if line.isEmpty {
                 continue
             }
-            // TODO: this will stop working in 1 month
-            if line.hasPrefix("2019") {
-                for suffix in suffixes {
-                    if line[31 ..< 31 + suffix.count] == suffix {
-                        if let coloredLogLine = line.embed(wordContainingSubstring: suffix, in: colors[suffix] ?? .default) {
-                            print(coloredLogLine.paintedTimestamp())
-                            continue upperFor
+            
+            if line.prefixedWithMonth() {
+                if let applicationNamePosition = applicationNamePosition,
+                    line[applicationNamePosition ..< applicationNamePosition + applicationName.count] == applicationName {
+                    shouldPrintSuplementaryLines = true
+                    for prefix in prefixes() {
+                        if line[classNamePosition ..< classNamePosition + prefix.count] == prefix {
+                            if let coloredLogLine = line.embed(wordContainingSubstring: prefix,
+                                                               in: colors[prefix] ?? .default,
+                                                               at: classNamePosition) {
+                                // Found string that contains searched class name
+                                print(coloredLogLine.paintedTimestamp())
+                                continue upperFor
+                            }
                         }
                     }
+                    // string doesn't contain searched class name but is printed by right application
+                    print(line.paintedTimestamp())
+                    continue
+                } else {
+                    shouldPrintSuplementaryLines = false
+                    continue
+                }
+            } else {
+                if shouldPrintSuplementaryLines {
+                    print(line)
                 }
             }
-            
-            print(line.paintedTimestamp())
         }
     } catch {
-        print(error)
+        print("\(error)".applyingColor(.red))
     }
     
     let end = DispatchTime.now()
@@ -134,4 +96,3 @@ let main = command(
 }
 
 main.run()
-
