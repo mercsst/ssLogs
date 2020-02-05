@@ -74,6 +74,10 @@ extension StringProtocol {
     func prefixedWithMonth() -> Bool {
         return monthsShort.contains(String(self[0 ..< 3]))
     }
+
+    func prefixedWithYear() -> Bool {
+        return String(self[0 ..< 2]) == "20"
+    }
 }
 
 extension String {
